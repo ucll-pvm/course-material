@@ -511,7 +511,7 @@
 
           <<-END
             <p>
-              Write the function <code>void veryquickort(int* ns, int size)</code> that, given a list that
+              Write the function <code>void veryquicksort(int* ns, unsigned size)</code> that, given a list that
               contains only single digit decimal numbers (i.e. 0 to 9), sorts this list in place (i.e. the function modifies the list pointed to by <code>ns</code>).
               For example, the array <code>5 4 2 5 1 9 8</code> must be transformed into <code>1 2 4 5 5 8 9</code>.
             </p>
