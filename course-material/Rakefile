@@ -19,6 +19,7 @@ directory 'dist/topics'
 
 def topic_task(topic)
     file "dist/topics/#{topic}.pdf" => topic_dependencies(topic) do |task|
+        puts "<--- #{topic} --->"
         Dir.chdir "topics/#{topic}" do
             sh "pdflatex slides.tex"
             sh "pdflatex slides.tex"
@@ -28,6 +29,8 @@ def topic_task(topic)
     end
 
     file "dist/topics/#{topic}-handouts.pdf" => topic_dependencies(topic) do |task|
+        puts "<--- #{topic} handout --->"
+
         Dir.chdir "topics/#{topic}" do
             sh "pdflatex handouts.tex"
             sh "pdflatex handouts.tex"
@@ -51,6 +54,16 @@ namespace :topic do
     task :all => TOPICS.map { |topic| "topic:#{topic}" }
 end
 
+desc 'Builds all topics'
 task :topics => TOPICS.flat_map { |topic| [ "dist/topics/#{topic}.pdf", "dist/topics/#{topic}-handouts.pdf" ] }
 
 task :default => [ :topics ]
+
+# Needs some cleanup
+desc 'Uploads dist to SEPARATE PATH on server'
+task :upload do
+    Dir.chdir 'dist' do
+        `ssh -p 22345 -l upload leone.ucll.be rm -rf /home/frederic/courses/pvm/volume/slides/*`
+        puts `scp -P 22345 -r * upload@leone.ucll.be:/home/frederic/courses/pvm/volume/slides`
+    end
+end
