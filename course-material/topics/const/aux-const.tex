@@ -160,21 +160,6 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Nuances: \texttt{const std::vector}}
-  \code[language=c++14]{const-vector.cpp}
-  \begin{itemize}
-    \item \texttt{const std::vector} works on two levels
-          \begin{itemize}
-            \item The vector itself cannot be modified
-            \item The items inside the vector cannot be modified either
-          \end{itemize}
-    \item Can you have an \emph{immutable} vector of \emph{mutable} items?
-    \item This cannot be expressed using \texttt{const}
-    \item \texttt{const} is an all or nothing affair
-  \end{itemize}
-\end{frame}
-
-\begin{frame}
   \frametitle{Nuances: Constant Pointers vs Constant Pointees}
   \code[language=c++14]{const-int-pointer.cpp}
   \begin{itemize}
@@ -204,6 +189,31 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Nuances: \texttt{const std::vector}}
+  \begin{itemize}
+    \item \texttt{const std::vector<Person*>} works on three levels
+          \begin{itemize}
+            \item The vector itself cannot be modified
+            \item The items inside the vector cannot be modified either
+            \item The pointees can be modified
+          \end{itemize}
+  \end{itemize}
+  \vskip5mm
+  \begin{overprint}
+    \onslide<1>
+    \code[language=c++14,font=\small]{const-vector1.cpp}
+
+    \onslide<2>
+    \code[language=c++14,font=\small]{const-vector2.cpp}
+
+    \onslide<3>
+    \code[language=c++14,font=\small]{const-vector3.cpp}
+
+    \onslide<4>
+    \code[language=c++14,font=\small]{const-vector4.cpp}
+  \end{overprint}
+\end{frame}
 
 \end{document}
 
