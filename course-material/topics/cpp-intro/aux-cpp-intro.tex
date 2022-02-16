@@ -330,7 +330,7 @@
   \frametitle{Evaluation Order}
   \code[language=c++14,width=6cm]{evaluation-order.cpp}
   \begin{itemize}
-    \item \texttt{std::cout << "Hello world"} prints the given string
+    \item \texttt{std::cout {<}< "Hello world"} prints the given string
     \item What happens?
           \begin{itemize}
             \item<2> Undefined behavior!
@@ -367,13 +367,13 @@
   \code[language=c++14]{memory.cpp}
   \begin{itemize}
     \item Whoops!
-    \item Overwrites entire memory space
+    \item Should overwrite entire memory space
   \end{itemize}
 \end{frame}
 
 \begin{frame}
   \frametitle{Java vs \cpp: Garbage Collection}
-  \code[language=java]{allocation.java}
+  \code[language=java,width=.9\linewidth]{allocation.java}
   \structure{Java}
   \begin{itemize}
     \item Lost object
@@ -400,7 +400,7 @@
   \vskip2mm
   \structure{\cpp}
   \begin{itemize}
-    \item Many different casts
+    \item Four different kinds of casting
     \item Some perform checks, some don't
     \item You can fully override type system
           \begin{itemize}
@@ -415,7 +415,7 @@
   \structure{Java}
   \begin{itemize}
     \item Integers are guaranteed to be two-complement 32 bit
-    \item Effect of overflow are predictable
+    \item Effects of overflow are predictable
   \end{itemize}
   \vskip2mm
   \structure{\cpp}
