@@ -162,8 +162,8 @@
   \frametitle{Unwieldiness}
   \begin{itemize}
     \item Very complex specification
-    \item \link{http://www.open-std.org/jtc1/sc22/wg21/docs/papers/2012/n3337.pdf}{Current standard}
-          counts 1300+ pages
+    \item \link{https://www.iso.org/standard/79358.html}{Current standard}
+          counts 1800+ pages
     \item Compilers have different interpretations of the standard
     \item Different compilers support different sets of features
     \item Compilers can introduce their own features
@@ -192,57 +192,155 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Java vs \cpp}
-  \structure{Java}
-  \begin{itemize}
-    \item Primary design goal: security
-    \item Ease of use
-    \item Programmers are fallible mentality
-  \end{itemize}
-  \vskip5mm
-  \structure{\cpp}
-  \begin{itemize}
-    \item Primary design goal: efficiency
-    \item Programmers are gods mentality
-  \end{itemize}
-\end{frame}
+  \frametitle{Python vs Java vs \cpp}
+  \begin{overprint}
+    \onslide<1|handout:1>
+    \structure{Python}
 
-\begin{frame}
-  \frametitle{Java vs \cpp: Array Indexing}
-  \code[language=c++14,width=5cm]{array-out-of-bounds.cpp}
-  \structure{Java}
-  \begin{itemize}
-    \item No array indexing goes unchecked
-    \item \texttt{ArrayIndexOutOfBounds} thrown in your face
-  \end{itemize}
-  \vskip2mm
-  \structure{\cpp}
-  \begin{itemize}
-    \item No checks whatsoever
-    \item Undefined behaviour
-    \item Possibly overwrites a random other variable
-  \end{itemize}
+    \onslide<2|handout:2>
+    \structure{Java}
+
+    \onslide<3|handout:3>
+    \structure{\cpp}
+  \end{overprint}
+
+  \begin{overprint}
+    \onslide<1|handout:1>
+    \begin{center}
+      \includegraphics[width=5cm]{bumper.jpg}
+    \end{center}
+
+    \onslide<2|handout:2>
+    \begin{center}
+      \includegraphics[width=5cm]{tank.jpg}
+    \end{center}
+
+    \onslide<3|handout:3>
+    \begin{center}
+      \includegraphics[width=5cm]{missile.jpg}
+    \end{center}
+  \end{overprint}
+
+  \begin{overprint}
+    \onslide<1|handout:1>
+    \begin{itemize}
+      \item Primary design goal: productivity
+      \item Safe and easy but slow
+      \item Mentality: programmers want to get something done
+    \end{itemize}
+
+    \onslide<2|handout:2>
+    \begin{itemize}
+      \item Primary design goal: security
+      \item Ease of use
+      \item Mentality: programmers are idiots
+    \end{itemize}
+
+    \onslide<3|handout:3>
+    \begin{itemize}
+      \item Primary design goal: efficiency
+      \item Mentality: programmers are godlike
+    \end{itemize}
+  \end{overprint}
 \end{frame}
 
 \begin{frame}
   \frametitle{Java vs \cpp: Null Pointers}
   \code[language=java,width=5cm]{null.java}
   \structure{Java}
-  \begin{itemize}
-    \item No member access goes unchecked
-    \item \texttt{NullPointereException} thrown in your face
-  \end{itemize}
+  \begin{overprint}
+    \onslide<1|handout:0>
+    \begin{center}
+      What happens?
+    \end{center}
+
+    \onslide<2-3|handout:1>
+    \begin{itemize}
+      \item No member access goes unchecked (= slow)
+      \item \texttt{NullPointerException} thrown in your face
+    \end{itemize}
+  \end{overprint}
   \vskip2mm
   \structure{\cpp}
+  \begin{overprint}
+    \onslide<1-2|handout:0>
+    \begin{center}
+      What happens?
+    \end{center}
+
+    \onslide<3|handout:1>
+    \begin{itemize}
+      \item No checks whatsoever
+      \item Undefined behaviour
+      \item Possibly runs some random code
+      \item If no guarantees are made about behaviour, no special checks are necessary (= fast)
+    \end{itemize}
+  \end{overprint}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Java vs \cpp: Array Indexing}
+  \code[language=c++14,width=5cm]{array-out-of-bounds.cpp}
+  \structure{Java}
+  \begin{overprint}
+    \onslide<1|handout:0>
+    \begin{center}
+      What happens?
+    \end{center}
+
+    \onslide<2-3|handout:1>
+    \begin{itemize}
+      \item No array indexing goes unchecked (= slow)
+      \item \texttt{ArrayIndexOutOfBounds} thrown in your face
+    \end{itemize}
+  \end{overprint}
+  \vskip2mm
+  \structure{\cpp}
+  \begin{overprint}
+    \onslide<1-2|handout:0>
+    \begin{center}
+      What happens?
+    \end{center}
+
+    \onslide<3|handout:1>
+    \begin{itemize}
+      \item Undefined behaviour
+      \item Possibly overwrites a random other variable
+      \item No checks needed of possible out-of-bounds (= fast)
+    \end{itemize}
+  \end{overprint}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Java vs \cpp: Bit Shift}
+  \code[language=c++14,width=5cm]{bitshift.cpp}
   \begin{itemize}
-    \item No checks whatsoever
-    \item Undefined behaviour
-    \item Possibly runs some random code
+    \item \texttt{x {<}{<} 1} shift \texttt{x}'s bit one position to the left
+    \item Same effect as $\times 2$
+    \item What happens?
+          \begin{itemize}
+            \item<2> Not all processors agree on what it should be
+            \item<2> \cpp\ does not want to take sides
+            \item<2> No consensus? Undefined!
+          \end{itemize}
   \end{itemize}
 \end{frame}
 
 \begin{frame}
-  \frametitle{Java vs \cpp: Memory Safety}
+  \frametitle{Evaluation Order}
+  \code[language=c++14,width=6cm]{evaluation-order.cpp}
+  \begin{itemize}
+    \item \texttt{std::cout << "Hello world"} prints the given string
+    \item What happens?
+          \begin{itemize}
+            \item<2> Undefined behavior!
+            \item<2> Cannot modify same memory location between two sequence points
+          \end{itemize}
+  \end{itemize}
+\end{frame}
+
+\begin{frame}
+  \frametitle{Java vs \cpp: Encapsulation}
   \code[language=java,width=5cm]{private.java}
   \structure{Java}
   \begin{itemize}
@@ -258,7 +356,7 @@
 \end{frame}
 
 \begin{frame}
-  \frametitle{Java vs \cpp: Null Pointers}
+  \frametitle{Java vs \cpp: Memory Safety}
   \structure{Java}
   \begin{itemize}
     \item Memory safe
@@ -303,8 +401,11 @@
   \structure{\cpp}
   \begin{itemize}
     \item Many different casts
-    \item Some check, some don't
-    \item You \emph{can} force a cast to any type you want
+    \item Some perform checks, some don't
+    \item You can fully override type system
+          \begin{itemize}
+            \item You \emph{can} force a cast to any type you want
+          \end{itemize}
   \end{itemize}
 \end{frame}
 
@@ -336,17 +437,17 @@
 \begin{frame}
   \frametitle{Why \cpp?}
   \begin{center}
-    \begin{tabular}{cc}
-      \textbf{Ranking} & \textbf{Taal} \\
+    \begin{tabular}{ccc}
+      \textbf{Ranking} & \textbf{2017} & \textbf{2022} \\
       \toprule
-      1 & Java \\
-      2 & C \\
-      3 & C++ \\
-      4 & C$^\sharp$ \\
-      5 & Python \\
+      1 & Java & Python \\
+      2 & C & C \\
+      3 & C++ & Java \\
+      4 & C$^\sharp$ & \cpp \\
+      5 & Python & C$^\sharp$ \\
     \end{tabular}
     \vskip5mm
-    \link{http://www.tiobe.com/tiobe-index/}{\tiny TIOBE Index for January 2017}
+    \link{http://www.tiobe.com/tiobe-index/}{\tiny TIOBE Index}
   \end{center}
 \end{frame}
 
@@ -364,13 +465,7 @@
               \item Opera
             \end{itemize}
       \item MS Office
-            \begin{itemize}
-              \item Word
-              \item Excel
-              \item Access
-              \item Powerpoint
-              \item Outlook
-            \end{itemize}
+      \item Visual Studio
     \end{itemize}
     \column{5cm}
     \begin{itemize}
@@ -382,8 +477,8 @@
       \item Photoshop
       \item Games
             \begin{itemize}
-              \item Id Tech 5, 6
-              \item Unreal Engine
+              \item \link{https://en.wikipedia.org/wiki/Id_Tech}{id Tech}
+              \item \link{https://en.wikipedia.org/wiki/Unreal_Engine}{Unreal Engine}
               \item Most games
             \end{itemize}
     \end{itemize}
@@ -459,10 +554,20 @@
   \end{itemize}
 \end{frame}
 
+\begin{frame}
+  \frametitle{Is \cpp\ Programming Really That Hard?}
+  \begin{itemize}
+    \item It requires discipline
+    \item \cpp\ gives you plenty of tools to build efficient code safely
+          \begin{itemize}
+            \item Macros
+            \item RAII
+            \item Templates
+            \item Smart pointers
+            \item \dots
+          \end{itemize}
+    \item But it's up to you to use them correctly
+  \end{itemize}
+\end{frame}
+
 \end{document}
-
-
-%%% Local Variables:
-%%% mode: latex
-%%% TeX-master: "cpp-intro"
-%%% End:
