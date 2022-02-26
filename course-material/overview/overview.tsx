@@ -100,7 +100,7 @@ function Topic(props : { name: string, children ?: React.ReactNode })
 
 function Slides(props : { id: string })
 {
-    const url = `/slides/topics/${props.id}`;
+    const url = `/slides/topics/${props.id}.pdf`;
 
     return (
         <SlideBlock>
