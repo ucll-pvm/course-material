@@ -165,9 +165,9 @@
   \begin{center}
     \begin{tikzpicture}
       \begin{scope}[scale=0.5,transform shape]
-        \draw (0,0) grid (8,1);
+        \draw (8,0) grid ++(8,1);
         \node[anchor=east,font=\ttfamily] at (0,0.5) {x = };
-        \foreach[count=\i,evaluate={\i-0.5} as \x] \v in {a,b,c,d,e,f,g,h} {
+        \foreach[count=\i,evaluate={\i-0.5+8} as \x] \v in {a,b,c,d,e,f,g,h} {
           \node[anchor=base] at (\x, 0.4) {\v};
         }
       \end{scope}
@@ -192,15 +192,21 @@
         \node[anchor=east,font=\ttfamily] at (0,0.5) {uint16\_t(x) = };
         \foreach[count=\i,evaluate={\i-0.5} as \x] \v in {0,0,0,0,0,0,0,0,a,b,c,d,e,f,g,h} {
           \node[anchor=base] at (\x, 0.4) {\v};
+          \coordinate (a\i) at (\x,0);
         }
       \end{scope}
-      \begin{scope}[yshift=-1cm,scale=0.5,transform shape]
+      \begin{scope}[yshift=-2cm,scale=0.5,transform shape]
         \draw (0,0) grid (16,1);
         \node[anchor=east,font=\ttfamily] at (0,0.5) {uint16\_t(x) << 8 = };
         \foreach[count=\i,evaluate={\i-0.5} as \x] \v in {a,b,c,d,e,f,g,h,0,0,0,0,0,0,0,0} {
           \node[anchor=base] at (\x, 0.4) {\v};
+          \coordinate (b\i) at (\x,1);
         }
       \end{scope}
+
+      \foreach[evaluate={int(\i+8)} as \j,evaluate={\i*0.1} as \k] \i in {1,...,8} {
+        \draw[-latex] (a\j) -- ($ (a\j) ! \k ! (b\j) $) -| (b\i);
+      }
     \end{tikzpicture}
   \end{center}
 \end{frame}
@@ -215,14 +221,16 @@
         \node[anchor=east,font=\ttfamily] at (0,0.5) {uint16\_t(x) << 8 = };
         \foreach[count=\i,evaluate={\i-0.5} as \x] \v in {a,b,c,d,e,f,g,h,0,0,0,0,0,0,0,0} {
           \node[anchor=base] at (\x, 0.4) {\v};
+          \coordinate (a\i) at (\x,0);
         }
       \end{scope}
       \begin{scope}[yshift=-1cm,scale=0.5,transform shape]
         \node[anchor=east,font=\ttfamily] at (0,0.5) {y = };
         \begin{scope}[xshift=8cm]
           \draw (0,0) grid (8,1);
-          \foreach[count=\i,evaluate={\i-0.5} as \x] \v in {i,j,k,l,m,n,o,p} {
+          \foreach[count=\i,evaluate={\i-0.5} as \x,evaluate={int(\i+8)} as \j] \v in {i,j,k,l,m,n,o,p} {
             \node[anchor=base] at (\x, 0.4) {\v};
+            \coordinate (b\j) at (\x,0);
           }
         \end{scope}
       \end{scope}
@@ -231,8 +239,15 @@
         \node[anchor=east,font=\ttfamily] at (0,0.5) {(uint16\_t(x) << 8) | y = };
         \foreach[count=\i,evaluate={\i-0.5} as \x] \v in {a,b,c,d,e,f,g,h,i,j,k,l,m,n,o,p} {
           \node[anchor=base] at (\x, 0.4) {\v};
+          \coordinate (c\i) at (\x,1);
         }
       \end{scope}
+      \foreach \i in {1,...,8} {
+        \draw[-latex] (a\i) -- (c\i);
+      }
+      \foreach \i in {9,...,16} {
+        \draw[-latex] (b\i) -- (c\i);
+      }
     \end{tikzpicture}
   \end{center}
 \end{frame}

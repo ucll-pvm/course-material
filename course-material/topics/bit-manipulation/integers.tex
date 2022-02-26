@@ -79,3 +79,15 @@
     \end{tabular}
   \end{center}
 \end{frame}
+
+\begin{frame}
+  \frametitle{Visual Comparison Signed vs Unsigned}
+  \begin{center}
+    \begin{tikzpicture}[scale=0.75,transform shape]
+      \draw[-latex] (-3,0) -- (5,0);
+
+      \draw[|-|] (-2,0.2) -- ++(4,0) node[midway,above] {\bf\sc signed} node[at start,above,font=\tiny] {$-2^{N-1}$} node[at end,above,font=\tiny] {$2^{N-1}-1$};
+      \draw[|-|] (0,-0.2) -- ++(4,0) node[midway,below] {\bf\sc unsigned} node[at start,below,font=\tiny] {$0$} node[at end,below,font=\tiny] {$2^N-1$};
+    \end{tikzpicture}
+  \end{center}
+\end{frame}
