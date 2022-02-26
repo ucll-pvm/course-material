@@ -79,7 +79,7 @@ const WeekChildrenContainerHtml = styled.div`
 
 const OverviewHtml = styled.div`
     margin: 1em auto;
-    width: 50%;
+    width: 500px;
 `;
 
 function Topic(props : { name: string, children ?: React.ReactNode })
