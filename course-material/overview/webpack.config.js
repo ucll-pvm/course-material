@@ -8,7 +8,7 @@ module.exports = {
         extensions: [ '.js', '.ts', '.tsx' ]
     },
     output: {
-        path: path.join(__dirname, '../dist'),
+        path: path.join(__dirname, 'dist'),
         filename: 'overview-bundle.js'
     },
     module: {
