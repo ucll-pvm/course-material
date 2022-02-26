@@ -3,6 +3,11 @@ require 'rake'
 require 'set'
 
 
+
+def topic_dependencies(topic)
+    `git ls-files topics/#{topic}`.lines.map(&:strip) + [ 'topics/ucll-slides.cls', 'topics/ucll-code.sty' ]
+end
+
 TOPIC_DIRECTORIES = Dir['topics/*'].select do |entry|
     File.directory? entry
 end
@@ -11,9 +16,6 @@ TOPICS = TOPIC_DIRECTORIES.map do |directory|
     directory.split(%r{/}).last
 end
 
-def topic_dependencies(topic)
-    `git ls-files topics/#{topic}`.lines.map(&:strip) + [ 'topics/ucll-slides.cls', 'topics/ucll-code.sty' ]
-end
 
 directory 'dist/topics'
 
@@ -60,7 +62,7 @@ task :topics => TOPICS.flat_map { |topic| [ "dist/topics/#{topic}.pdf", "dist/to
 task :default => [ :topics ]
 
 # Needs some cleanup
-desc 'Uploads dist to SEPARATE PATH on server'
+desc 'Uploads dist to slides/topics on server'
 task :upload do
     Dir.chdir 'dist' do
         `ssh -p 22345 -l upload leone.ucll.be rm -rf /home/frederic/courses/pvm/volume/slides/*`
