@@ -158,7 +158,7 @@ export function Overview(props : {})
                 {topic("References", true, true)}
             </WeekContainer>
             <WeekContainer week={5}>
-                {topic("Classes (overview)", true, false)}
+                {topic("Classes (overview)", true, false, 'classes-overview')}
                 {topic("Constructors", true, false)}
                 {topic("Structs", true, false)}
                 {topic("sizeof", true, false)}
