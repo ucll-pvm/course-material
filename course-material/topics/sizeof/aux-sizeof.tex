@@ -38,9 +38,9 @@
   \code[language=c++14]{vector.cpp}
   \begin{itemize}
     \item \texttt{sizeof} tells you the size of the object
-    \item \texttt{sizeof(vec)} equals 32 + 32 + 32 = 96 (assuming 32 bit)
+    \item \texttt{sizeof(vec)} equals 4 + 4 + 4 = 12 {\tiny (assuming 32 bit pointers)}
           \begin{itemize}
-            \item Will always be 96, regardless of actual number of items
+            \item Will always be 12, regardless of number of items in vector
             \item Memory pointed to by \texttt{items} not counted by \texttt{sizeof}
           \end{itemize}
   \end{itemize}
