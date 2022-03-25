@@ -54,7 +54,7 @@
            END
          end
       %>
-      
+
       <%=
          exercise(Lib::Interpretation) do
            self.source = <<-END
@@ -204,7 +204,7 @@
                  The rules about sequence points are a bit complicated (and even outdated since C++11, they've been
                  replaced by something probably even more confusing), but suffice it to say that it's a bad idea
                  to put multiple state modifying operations on the same line. Here, each <code>foo()</code>
-                 operations modifies the value of some variable (hence it is state modifying),
+                 operation modifies the value of some variable (hence it is state modifying),
                  and since they appear on the same line, you have no way of knowing in what order
                  it will be executed. For example, on this compiler, the program printed 210.
                </p>
@@ -236,7 +236,7 @@
              int main()
              {
                Foo foo;
-               
+
                std::cout << foo << foo << foo;
              }
            END
@@ -304,7 +304,7 @@
                  int x;
 
                  Foo(int x) : x(x) { }
-                 
+
                  Foo operator *(const Foo& foo)
                  {
                      return Foo(x * foo.x);
@@ -361,11 +361,11 @@
                  int x, y;
 
                  Foo(int x, int y) : x(x), y(y) { }
-                 
+
                  Foo& operator *=(const Foo& foo)
                  {
                      x *= foo.x;
-                     
+
                      return *this;
                  }
              };
@@ -389,7 +389,7 @@
            END
          end
       %>
-              
+
       <%=
         exercise do
           extend SourceCodeMixin
@@ -453,7 +453,7 @@
               Write a class <code>approx</code> that allows you to write
               <code>x == approx(5)</code> or <code>x == approx(5, 0.00001)</code>
               to allow for self chosen <code>epsilon</code>.
-            </p>  
+            </p>
           END
         end
       %>
