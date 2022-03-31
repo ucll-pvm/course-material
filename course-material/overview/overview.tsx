@@ -174,7 +174,7 @@ export function Overview(props : {})
             <WeekContainer week={7}>
                 {topic("Inheritance", true, true)}
                 {topic("Templates", true, true)}
-                {topic("Casting", true, true)}
+                {topic("Casts", true, true)}
             </WeekContainer>
             <WeekContainer week={8}>
                 {topic("Bit Manipulation", true, false)}
