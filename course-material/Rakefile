@@ -54,6 +54,14 @@ end
 namespace :topic do
     desc "Builds all topics"
     task :all => TOPICS.map { |topic| "topic:#{topic}" }
+
+    desc "Uploads topics"
+    task :upload do
+        Dir.chdir 'dist' do
+            `ssh upload.leone.ucll.be rm -rf /home/frederic/courses/pvm/volume/slides/*`
+            puts `scp -r * upload.leone.ucll.be:/home/frederic/courses/pvm/volume/slides`
+        end
+    end
 end
 
 desc 'Builds all topics'
@@ -61,11 +69,17 @@ task :topics => TOPICS.flat_map { |topic| [ "dist/topics/#{topic}.pdf", "dist/to
 
 task :default => [ :topics ]
 
-# Needs some cleanup
-desc 'Uploads dist to slides/topics on server'
-task :upload do
-    Dir.chdir 'dist' do
-        `ssh -p 22345 -l upload leone.ucll.be rm -rf /home/frederic/courses/pvm/volume/slides/*`
-        puts `scp -P 22345 -r * upload@leone.ucll.be:/home/frederic/courses/pvm/volume/slides`
+namespace :overview do
+    desc 'Compile overview'
+    task :build do
+        Dir.chdir 'overview' do
+            sh 'npm start'
+        end
+    end
+
+    task :upload do
+        Dir.chdir 'overview/dist' do
+            puts `scp -r * upload.leone.ucll.be:/home/frederic/courses/pvm/volume/`
+        end
     end
 end
