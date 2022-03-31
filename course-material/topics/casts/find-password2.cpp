@@ -7,7 +7,7 @@ int find_password_index(const Person& person,
   // Scan person object
   for (int i = 0; i < sizeof(Person); ++i) {
     // __try: Windows-specific, to prevent crashes
-    // to due illegal memory accesses
+    // due to illegal memory accesses
     __try {
       // Pretend p points to string
       const std::string* ps = reinterpret_cast<const std::string*>(p + i);
