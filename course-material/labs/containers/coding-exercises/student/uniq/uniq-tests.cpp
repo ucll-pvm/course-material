@@ -1,17 +1,16 @@
 #include "uniq.h"
 #include "../Catch.h"
-#include <set>
+#include <vector>
 
-void test(std::vector<int>& ns, const std::set<int>& expected)
+void test(std::vector<int>& ns, const std::vector<int>& expected)
 {
     uniq(&ns);
-    std::set<int> actual(ns.begin(), ns.end());
 
-    REQUIRE(actual == expected);
+    REQUIRE(ns == expected);
 }
 
 #define ARRAY(...)          __VA_ARGS__
-#define TEST(NS, EXPECTED)  TEST_CASE("Uniq of {" #NS "}") { std::vector<int> ns { NS }; std::set<int> expected { EXPECTED }; test(ns, expected); }
+#define TEST(NS, EXPECTED)  TEST_CASE("Uniq of {" #NS "}") { std::vector<int> ns { NS }; std::vector<int> expected { EXPECTED }; test(ns, expected); }
 
 TEST(ARRAY(), ARRAY())
 TEST(ARRAY(1), ARRAY(1))
